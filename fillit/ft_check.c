@@ -6,7 +6,7 @@
 /*   By: lzhansha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:10:50 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/16 16:05:47 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/16 16:54:18 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int ft_check_main(char *src)
 	while (src[i] && count < 26)
 	{
 		box = ft_strsub(src, i, 20);
-		//ft_putstr(box);
 		count++;
 		if (ft_check_char(box) == 0)
 			ft_putstr("valid\n");
