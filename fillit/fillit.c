@@ -11,23 +11,16 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "libft/libft.h"
-
- ft_read_file(int fd)
-{
-
-}
 
 int main(int ac, char **av)
 {
+	char *str_src;
+
 	if (ac != 2)
-	{
-		ft_putstr("usage: ");
-		return ();
-	}
+		ft_putstr_fd(STR_WRONGAC, 2);
 	else if (ac == 2) 
 	{
-		ft_read_file(open(av[1], ))
+		str_src = ft_read_main(av[1]);
 	}
 	return (0);
 }

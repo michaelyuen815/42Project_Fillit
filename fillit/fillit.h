@@ -13,6 +13,7 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# include 
+# include "libft.h"
+# define STR_WRONGAC "usage: ./fillit target_file" 
 
 #endif
