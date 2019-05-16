@@ -6,37 +6,11 @@
 /*   By: lzhansha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:10:50 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/16 15:34:59 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/16 16:05:47 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-int ft_check_char(char *str)
-{
-	int i;
-	int block_count;
-	int tot;
-
-	tot = 0;
-	i = 0;
-	block_count = 0;
-	while (str[i] && i < 20)
-	{
-		if (!(str[i] == '.' || str[i] == '#' ||
-					(i % 5 == 4 && str[i] != '\n')))
-			return (-1);
-		if (str[i] == '#')
-		{
-		    ++block_count;
-			tot += ft_check_sides(str, i);
-		}
-		i++;
-	}
-	if (!(tot == 6 || tot == 8) || block_count > 4)
-		return (-1);
-	return (0);
-}
 
 int ft_check_sides(char *str, int i)
 {
@@ -54,6 +28,34 @@ int ft_check_sides(char *str, int i)
 	return (total);
 }
 
+int ft_check_char(char *str)
+{
+	int i;
+	int block_count;
+	int tot;
+
+	tot = 0;
+	i = 0;
+	block_count = 0;
+	if (!str)
+		return (-1);
+	while (str[i] && i < 20)
+	{
+		if (!(str[i] == '.' || str[i] == '#' ||
+					(i % 5 == 4 && str[i] == '\n')))
+			return (-1);
+		if (str[i] == '#')
+		{
+		    ++block_count;
+			tot += ft_check_sides(str, i);
+		}
+		i++;
+	}
+	if (!(tot == 6 || tot == 8) || block_count > 4)
+		return (-1);
+	return (0);
+}
+
 int ft_check_main(char *src)
 {
 	int i;
@@ -64,24 +66,21 @@ int ft_check_main(char *src)
 	j = 0;
 	i = 0;
 	count = 0;
-	box = (char *)malloc(sizof(char) * 22)
+	if (!src)
+		return (0);
 	while (src[i] && count < 26)
 	{
-		j = 0;
-		while ((i % 21) < 20)
-			box[j++] = src[i++];
-		box[j] = '\0';
-		if (i % 21 == 20 && src[i] != '\n' && ft_strlen(src) != i + 1)
-			return (-1);
+		box = ft_strsub(src, i, 20);
+		//ft_putstr(box);
 		count++;
 		if (ft_check_char(box) == 0)
-			ft_putstr("valid");
+			ft_putstr("valid\n");
 		else
 		{
-			ft_putstr("invalid");
+			ft_putstr("invalid\n");
 			return (-1);
 		}
-		i++;
+		i += 21;
 	}
 	return (1);
 }
