@@ -6,18 +6,18 @@
 #    By: lzhansha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/16 12:07:48 by lzhansha          #+#    #+#              #
-#    Updated: 2019/05/16 12:09:23 by lzhansha         ###   ########.fr        #
+#    Updated: 2019/05/16 12:36:21 by lzhansha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
-SRCS = src/*.c
-HDRS = includes/fillit.h includes/libft/libft.h
+SRCS = fillit/*.c
+HDRS = fillit/fillit.h libft/libft.h
 
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror $(SRCS) -I $(HDRS) -o $(NAME)
+	gcc -Wall -Wextra -Werror $(SRCS) -I $(HDRS) -L libft -lft -o $(NAME)
 
 clean:
 	/bin/rm -rf *.o
