@@ -6,7 +6,7 @@
 /*   By: chyuen <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 14:17:03 by chyuen            #+#    #+#             */
-/*   Updated: 2019/05/16 14:30:00 by chyuen           ###   ########.fr       */
+/*   Updated: 2019/05/16 15:56:03 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct	s_opp
 } 				t_opp;
 
 char	*ft_read_main(char **av);
+int		ft_check_main(char *str);
 
 int main(void)
 {
@@ -53,7 +54,8 @@ int main(void)
 	while (++i < 19)
 	{
 		result = ft_read_main(g_ncase[i].name);
-		printf("%s result =\n%s$\n\n", g_ncase[i].name[1], result);
+		ft_check_main(result);
+		//printf("%s result =\n%s$\n\n", g_ncase[i].name[1], result);
 		ft_strdel(&result);
 	}
 	return (0);
