@@ -48,7 +48,7 @@ int		ft_check_char(char *str, int **shape)
 		{
 			++block_count;
 			tot += ft_check_sides(str, i);
-			*shape[j++] = i;
+			(*shape)[j++] = i;
 		}
 		i++;
 	}
@@ -70,7 +70,7 @@ t_list	*ft_check_main(char *src)
 	{
 		if (ft_check_char(src, &(curr->shape)) != 0)
 		{
-			ft_lstdel(list, &ft_bzero)
+			ft_lstdel(&list, &ft_bzero);
 			return (NULL);
 		}
 		if (src[20])

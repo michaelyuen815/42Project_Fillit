@@ -21,6 +21,6 @@
 # define STR_WRONGAC "usage: ./fillit target_file"
 
 char		*ft_read_main(char **av);
-int			ft_check_main(char *src);
+t_list	*ft_check_main(char *src);
 
 #endif

@@ -20,8 +20,8 @@ int	main(int ac, char **av)
 		ft_putstr_fd(STR_WRONGAC, 2);
 	else if (ac == 2)
 	{
-		str_src = ft_read_main(av[1]);
-		if (ft_check_main(str_src) != 1)
+		str_src = ft_read_main(av);
+		if (!ft_check_main(str_src))
 		{
 			ft_putstr_fd("error\n", 2);
 			return (0);
