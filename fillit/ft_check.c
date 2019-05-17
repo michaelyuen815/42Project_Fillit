@@ -6,7 +6,7 @@
 /*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:10:50 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/17 12:30:57 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 13:36:54 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ int		ft_check_sides(char *str, int i)
 	return (total);
 }
 
-int		ft_check_char(char *str)
+int		ft_check_char(char *str, int **shape)
 {
 	int i;
 	int block_count;
 	int tot;
+	int j;
 
 	tot = 0;
 	i = 0;
+	j = 0;
 	block_count = 0;
-	if (!str)
-		return (-1);
 	while (str[i] && i < 20)
 	{
 		if (!(str[i] == '.' || str[i] == '#' ||
@@ -48,59 +48,35 @@ int		ft_check_char(char *str)
 		{
 			++block_count;
 			tot += ft_check_sides(str, i);
+			*shape[j++] = i;
 		}
 		i++;
 	}
-	if (!(tot == 6 || tot == 8) || block_count > 4)
+	if (!(tot == 6 || tot == 8) || block_count > 4 || !str)
 		return (-1);
 	return (0);
 }
 
-char	*ft_check_array(char *box, int count)
+t_list	*ft_check_main(char *src)
 {
-	int		i;
-	char	*tet;
-	int		j;
+	char	c;
+	t_list	*curr;
+	t_list	*list;
 
-	i = 0;
-	j = 0;
-	tet = ft_strnew(16);
-	while (box[i])
+	c = 'A';
+	list = ft_lstnew(NULL, c);
+	curr = list;
+	while (*src) 
 	{
-		if (box[i] != '\n')
+		if (ft_check_char(src, &(curr->shape)) != 0)
 		{
-			if (box[i] == '.')
-				tet[j % 16] = box[i];
-			else
-				tet[j % 16] = 'A' + count;
-			j++;
+			ft_lstdel(list, &ft_bzero)
+			return (NULL);
 		}
-		i++;
+		if (src[20])
+			curr->next = ft_lstnew(NULL, ++c);
+		curr = curr->next;
+		src = src + (src[20] == '\n' ? 21 : 20);
 	}
-	return (tet);
-}
-
-t_list		ft_check_main(char *src)
-{
-	int		i;
-	char	*box;
-	t_list	*tetris;
-
-	i = 0;
-	tetris = NULL;
-	if (!src)
-		return (tetris);
-	while (src[i * 20 + (i - 1)] && i < 26)
-	{
-		box = ft_strsub(src, i * 21, 20);
-		if (ft_check_char(box) != 0)
-		{
-			free(box);
-			return (-1);
-		}
-		else
-			tetris = ft_check_create(box);
-		i++;
-	}
-	return (tetris);
+	return (list);
 }
