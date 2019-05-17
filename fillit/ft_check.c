@@ -6,14 +6,11 @@
 /*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:10:50 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/17 11:06:33 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 12:30:57 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-char	**g_tetris;
-int		g_num;
 
 int		ft_check_sides(char *str, int i)
 {
@@ -83,16 +80,16 @@ char	*ft_check_array(char *box, int count)
 	return (tet);
 }
 
-int		ft_check_main(char *src)
+t_list		ft_check_main(char *src)
 {
 	int		i;
 	char	*box;
+	t_list	*tetris;
 
 	i = 0;
+	tetris = NULL;
 	if (!src)
-		return (-1);
-	if (!(tetris = (char**)ft_memalloc(sizeof(*tetris) * 27)))
-		return (-1);
+		return (tetris);
 	while (src[i * 20 + (i - 1)] && i < 26)
 	{
 		box = ft_strsub(src, i * 21, 20);
@@ -102,9 +99,8 @@ int		ft_check_main(char *src)
 			return (-1);
 		}
 		else
-			tetris[i] = ft_check_array(box, i);
+			tetris = ft_check_create(box);
 		i++;
 	}
-	g_num = i;
-	return (0);
+	return (tetris);
 }
