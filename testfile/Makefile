@@ -1,6 +1,6 @@
 
 all: 
-	gcc test.c ../fillit/ft_read.c ../fillit/ft_check.c -I ../libft -I ../fillit -L ../libft -lft
+	gcc test.c ../fillit/ft_check.c ../fillit/ft_read.c -I ../libft -I ../fillit -L ../libft -lft
 
 clean:
 

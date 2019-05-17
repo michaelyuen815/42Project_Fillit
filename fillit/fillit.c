@@ -26,8 +26,8 @@ int	main(int ac, char **av)
 			ft_putstr_fd("error\n", 2);
 			return (0);
 		}
-		else
-			ft_solve_main(g_tetris, g_num);
+		//else
+			//ft_solve_main(g_tetris, g_num);
 	}
 	return (0);
 }

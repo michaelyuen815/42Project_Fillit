@@ -18,14 +18,13 @@ typedef struct	s_opp
 	char	**name;
 } 				t_opp;
 
-char	*ft_read_main(char **av);
-int		ft_check_main(char *str);
-
 int main(void)
 {
 	int i;
 	int j;
 	char *result;
+	t_list *t_tet;
+	t_list *t_tmp;
 
 	t_opp g_ncase[] =
 	{
@@ -51,12 +50,28 @@ int main(void)
 	};
 
 	i = -1;
-	while (++i < 19)
+	while (++i < 11)
 	{
 		result = ft_read_main(g_ncase[i].name);
-		ft_check_main(result);
-		//printf("%s result =\n%s$\n\n", g_ncase[i].name[1], result);
+		t_tet = NULL;
+		if (result)
+			t_tet = ft_check_main(result);
+		t_tmp = t_tet;
+		printf("Case %s\n", g_ncase[i].name[1]);
+		if (!t_tet)
+		{
+			printf("fail\n");
+		}
+		while (t_tmp)
+		{
+			j = -1;
+			printf("result = %c\n", t_tmp->ch);
+			while (++j < 4)
+				printf("shape[%d] = %d\n\n", j, t_tmp->shape[j]);
+			t_tmp = t_tmp->next;
+		}
 		ft_strdel(&result);
+		ft_lstdel(&t_tet,&ft_bzero);
 	}
 	return (0);
 }
