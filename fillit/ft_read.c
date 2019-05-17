@@ -13,10 +13,6 @@
 #include "fillit.h"
 #include "fcntl.h"
 
-#define BUFF_SIZE 1
-#define STR_WGOPEN ": No such file or directory\n"
-#define STR_WGREAD ": Error during reading\n"
-
 static void	ft_print_erropen(char *str_pgm, char *str_file)
 {
 	ft_putstr_fd("./", 2);

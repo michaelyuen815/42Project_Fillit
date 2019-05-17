@@ -18,24 +18,21 @@
 **keep content_size 0 in node if content is NULL
 */
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_list	*ft_lstnew(int const *shape, char ch)
 {
 	t_list *ret;
 
 	if (!(ret = (t_list*)malloc(sizeof(t_list))))
 		return (NULL);
-	ret->content = NULL;
-	ret->content_size = 0;
-	if (content)
+	ret->content_size = 4 * sizeof(int);
+	ret->ch = ch;
+	if (!(ret->shape = ft_memalloc(ret->content_size)))
 	{
-		if (!(ret->content = ft_memalloc((content_size))))
-		{
-			free(ret);
-			return (NULL);
-		}
-		ft_memcpy(ret->content, (void*)content, content_size);
-		ret->content_size = content_size;
+		free(ret);
+		return (NULL);
 	}
+	if (shape)
+		ft_memcpy((void*)ret->shape, (void*)shape, ret->content_size);
 	ret->next = NULL;
 	return (ret);
 }

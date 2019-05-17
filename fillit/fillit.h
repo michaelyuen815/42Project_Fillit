@@ -23,5 +23,4 @@
 char		*ft_read_main(char **av);
 int			ft_check_main(char *src);
 
-
 #endif
