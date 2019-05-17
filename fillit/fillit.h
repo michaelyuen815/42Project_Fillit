@@ -20,7 +20,7 @@
 # define STR_WGREAD ": Error during reading\n"
 # define STR_WRONGAC "usage: ./fillit target_file"
 
-char		*ft_read_main(char **av);
+char	*ft_read_main(char **av);
 t_list	*ft_check_main(char *src);
 
 #endif

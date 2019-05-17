@@ -66,7 +66,7 @@ t_list	*ft_check_main(char *src)
 	c = 'A';
 	list = ft_lstnew(NULL, c);
 	curr = list;
-	while (*src) 
+	while (*src)
 	{
 		if (ft_check_char(src, &(curr->shape)) != 0)
 		{
