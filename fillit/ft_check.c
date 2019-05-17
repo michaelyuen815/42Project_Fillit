@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lzhansha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:10:50 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/16 17:00:05 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 11:06:33 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int ft_check_sides(char *str, int i)
+char	**g_tetris;
+int		g_num;
+
+int		ft_check_sides(char *str, int i)
 {
 	int total;
 
@@ -28,7 +31,7 @@ int ft_check_sides(char *str, int i)
 	return (total);
 }
 
-int ft_check_char(char *str)
+int		ft_check_char(char *str)
 {
 	int i;
 	int block_count;
@@ -46,7 +49,7 @@ int ft_check_char(char *str)
 			return (-1);
 		if (str[i] == '#')
 		{
-		    ++block_count;
+			++block_count;
 			tot += ft_check_sides(str, i);
 		}
 		i++;
@@ -56,25 +59,52 @@ int ft_check_char(char *str)
 	return (0);
 }
 
-int ft_check_main(char *src)
+char	*ft_check_array(char *box, int count)
 {
-	int i;
-	int count;
-	char *box;
-	int j;
+	int		i;
+	char	*tet;
+	int		j;
 
-	j = 0;
 	i = 0;
-	count = 0;
-	if (!src)
-		return (0);
-	while (src[i] && count < 26)
+	j = 0;
+	tet = ft_strnew(16);
+	while (box[i])
 	{
-		box = ft_strsub(src, i, 20);
-		count++;
-		if (ft_check_char(box) != 0)
-			return (-1);
-		i += 21;
+		if (box[i] != '\n')
+		{
+			if (box[i] == '.')
+				tet[j % 16] = box[i];
+			else
+				tet[j % 16] = 'A' + count;
+			j++;
+		}
+		i++;
 	}
-	return (1);
+	return (tet);
+}
+
+int		ft_check_main(char *src)
+{
+	int		i;
+	char	*box;
+
+	i = 0;
+	if (!src)
+		return (-1);
+	if (!(tetris = (char**)ft_memalloc(sizeof(*tetris) * 27)))
+		return (-1);
+	while (src[i * 20 + (i - 1)] && i < 26)
+	{
+		box = ft_strsub(src, i * 21, 20);
+		if (ft_check_char(box) != 0)
+		{
+			free(box);
+			return (-1);
+		}
+		else
+			tetris[i] = ft_check_array(box, i);
+		i++;
+	}
+	g_num = i;
+	return (0);
 }
