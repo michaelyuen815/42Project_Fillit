@@ -6,7 +6,7 @@
 /*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:10:50 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/17 13:36:54 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:15:00 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ int		ft_check_char(char *str, int **shape)
 	int i;
 	int block_count;
 	int tot;
-	int j;
 
 	tot = 0;
 	i = 0;
-	j = 0;
 	block_count = 0;
 	while (str[i] && i < 20)
 	{
@@ -46,9 +44,9 @@ int		ft_check_char(char *str, int **shape)
 			return (-1);
 		if (str[i] == '#')
 		{
-			++block_count;
 			tot += ft_check_sides(str, i);
-			(*shape)[j++] = i;
+			if (block_count++ < 4)
+				(*shape)[block_count - 1] = i;
 		}
 		i++;
 	}
