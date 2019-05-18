@@ -19,12 +19,15 @@ SRCDIR = srcs
 all: $(NAME)
 
 $(NAME):
+	Make -C $(LIBDIR)
 	gcc -Wall -Wextra -Werror -o $(NAME) $(SRCS) -I $(SRCDIR) -I $(LIBDIR) -L $(LIBDIR) -lft 
 
 clean:
 	/bin/rm -rf *.o
+	Make clean -C $(LIBDIR)
 
 fclean: clean
 	/bin/rm -rf $(NAME)
+	Make fclean -C $(LIBDIR)
 
 re: fclean all
