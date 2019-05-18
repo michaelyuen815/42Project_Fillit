@@ -6,20 +6,41 @@
 /*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 11:03:29 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/17 19:19:06 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 20:02:10 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void    ft_solve_unfillone(char *result, t_list *tmp, size_t size, size_t i)
+size_t	ft_solve_coor(int shape_0, int shape_j, size_t size)
 {
-
+	return (shape_j / 5 * (size + 1) - shape_0 / 5 * (size + 1)
+		+ shape_j % 5 - shape_0 % 5);
 }
 
-int     ft_solve_fillone(char *result, t_list *t_tmp, size_t size, size_t i)    //check whether the node can fill in position i and fill it if possible
+int    ft_solve_unfillone(char *result, t_list *t_cur, size_t size, size_t i)
 {
+    t_cur->used = 0; 
+}
 
+int     ft_solve_fillone(char *result, t_list *t_cur, size_t size, size_t i)    //check whether the node can fill in position i and fill it if possible
+{
+	size_t	j;
+	size_t	index;
+
+	j = -1;
+	while (++j < 4)
+	{
+		index = i + ft_solve_coor(t_cur->shape[0], t_cur->shape[j], size);
+		if (index < 0 || index > size * (size + 1) || index % (size + 1 ) == size)
+			return (ft_solve_unfillone(result, t_cur, size, i));
+		if (!result[index] || result[index] == '.')
+			result[index] = t_cur->ch;
+		else
+			return (ft_solve_unfillone(result, t_cur, size, i));
+	}
+	t_cur->used = 1;
+	return (1);
 }
 
 int     ft_solve_fillall(char *result, t_list *t_cur, size_t size)
@@ -31,16 +52,16 @@ int     ft_solve_fillall(char *result, t_list *t_cur, size_t size)
     i = -1;
     while (++i <= size * (size + 1))
     {
+		if (i % (size + 1) == size)
+			result[i] = '\n';
         if (t_cur->used && !result[i])
             result[i] = '.';
         if (!t_cur->used && (!result[i] || result[i] == '.')
         {
             if (ft_solve_fillone(result, t_cur, size, i))
 			{
-                t_cur->used = 1;
                 if (!ft_solve_fillall(result, t_cur->next, size))
-				{
-                    t_cur->used = 0; 
+				{	
                     ft_solve_unfillone(result, t_cur, size, i);
                     result[i] = '.';
 				}
