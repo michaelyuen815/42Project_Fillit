@@ -11,13 +11,15 @@
 # **************************************************************************** #
 
 NAME = fillit
-SRCS = fillit/*.c
-HDRS = fillit/fillit.h libft/libft.h
+SRCS = srcs/*.c
+
+LIBDIR = libft
+SRCDIR = srcs
 
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Wextra -Werror $(SRCS) -I $(HDRS) -L libft -lft -o $(NAME)
+	gcc -Wall -Wextra -Werror -o $(NAME) $(SRCS) -I $(SRCDIR) -I $(LIBDIR) -L $(LIBDIR) -lft 
 
 clean:
 	/bin/rm -rf *.o
