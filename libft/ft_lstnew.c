@@ -26,6 +26,7 @@ t_list	*ft_lstnew(int const *shape, char ch)
 		return (NULL);
 	ret->content_size = 4 * sizeof(int);
 	ret->ch = ch;
+	ret->used = 0;
 	if (!(ret->shape = ft_memalloc(ret->content_size)))
 	{
 		free(ret);

@@ -37,6 +37,7 @@
 typedef struct	s_list
 {
 	int				*shape;
+	int				used;
 	char			ch;
 	size_t			content_size;
 	struct s_list	*next;
