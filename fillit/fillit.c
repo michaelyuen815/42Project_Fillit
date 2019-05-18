@@ -6,7 +6,7 @@
 /*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 12:12:33 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/17 11:05:26 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 20:23:13 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,27 @@
 
 int	main(int ac, char **av)
 {
-	char *str_src;
+	char	*str_src;
+	t_list	*t_tetris;
+	char	*result;
 
 	if (ac != 2)
 		ft_putstr_fd(STR_WRONGAC, 2);
 	else if (ac == 2)
 	{
 		str_src = ft_read_main(av);
-		if (!ft_check_main(str_src))
-		{
+		if (!(t_tetris = ft_check_main(str_src)))
 			ft_putstr_fd("error\n", 2);
-			return (0);
+		else
+		{
+			result = ft_solve_main(t_tetris);
+			ft_putstr(result);
+			ft_strdel(&result);
 		}
-		//else
-			//ft_solve_main(g_tetris, g_num);
+		if (!str_src)
+			ft_strdel(&str_src);
+		if (!t_tetris)
+			ft_lstdel(&t_tetris, &ft_bzero);
 	}
 	return (0);
 }

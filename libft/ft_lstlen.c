@@ -6,7 +6,7 @@
 /*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 18:58:17 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/17 18:59:48 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 20:35:52 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ size_t	ft_lstlen(t_list *list)
 		list = list->next;
 		i++;
 	}
-	return (i)
+	return (i);
 }

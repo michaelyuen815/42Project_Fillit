@@ -6,11 +6,17 @@
 /*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 13:10:50 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/17 14:15:00 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 20:49:04 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+int		ft_check_solve_coor(int sh0, int shj, size_t size)
+{
+	return (shj / 5 * (size + 1) - sh0 / 5 * (size + 1)
+	+ shj % 5 - sh0 % 5);
+}
 
 int		ft_check_sides(char *str, int i)
 {
@@ -64,6 +70,8 @@ t_list	*ft_check_main(char *src)
 	c = 'A';
 	list = ft_lstnew(NULL, c);
 	curr = list;
+	if (!src)
+		return (NULL);
 	while (*src)
 	{
 		if (ft_check_char(src, &(curr->shape)) != 0)
