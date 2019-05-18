@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chyuen <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 14:17:03 by chyuen            #+#    #+#             */
-/*   Updated: 2019/05/16 15:56:03 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:18:33 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int main(void)
 	};
 
 	i = -1;
-	while (++i < 11)
+	while (++i < 19)
 	{
 		result = ft_read_main(g_ncase[i].name);
 		t_tet = NULL;
