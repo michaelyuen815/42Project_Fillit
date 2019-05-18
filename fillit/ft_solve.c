@@ -6,13 +6,13 @@
 /*   By: lzhansha <lzhansha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/17 11:03:29 by lzhansha          #+#    #+#             */
-/*   Updated: 2019/05/17 11:07:40 by lzhansha         ###   ########.fr       */
+/*   Updated: 2019/05/17 19:19:06 by lzhansha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void    ft_solve_unfillone(char *reusult, t_list *tmp, size_t size, size_t i)
+void    ft_solve_unfillone(char *result, t_list *tmp, size_t size, size_t i)
 {
 
 }
@@ -28,21 +28,24 @@ int     ft_solve_fillall(char *result, t_list *t_cur, size_t size)
 
     if (!t_cur)
         return (1);
-    i = 0;
-    while (i <= size * (size + 1))
+    i = -1;
+    while (++i <= size * (size + 1))
     {
         if (t_cur->used && !result[i])
             result[i] = '.';
         if (!t_cur->used && (!result[i] || result[i] == '.')
         {
             if (ft_solve_fillone(result, t_cur, size, i))
+			{
                 t_cur->used = 1;
                 if (!ft_solve_fillall(result, t_cur->next, size))
+				{
                     t_cur->used = 0; 
-                    ft_solve_unfillone();
+                    ft_solve_unfillone(result, t_cur, size, i);
                     result[i] = '.';
+				}
+			}
         }
-        i++;
     }
     if (t_cur->used)
         return (1);
@@ -51,10 +54,10 @@ int     ft_solve_fillall(char *result, t_list *t_cur, size_t size)
 
 char	*ft_solve_main(t_list *t_tetris, int num)
 {
-	size_t size;
+	size_t	size;
     char    *result;
 
-    size = roundup(sqrt(4 * no. of node));
+    size = roundup(sqrt(4 * ft_lstlen(t_tetris)));
     result = ft_strnew(size * (size + 1));
 
     while (!ft_solve_fillall(result, t_tetris, size))
