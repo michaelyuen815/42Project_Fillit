@@ -54,7 +54,7 @@ char		*ft_read_main(char **av)
 
 	fd = open(av[1], O_RDONLY);
 	str_src = NULL;
-	if (fd > 2)
+	if (fd >= 0)
 	{
 		if (!(str_buff = ft_strnew(BUFF_SIZE)))
 			return (ft_print_errread(av[0], av[1]));
