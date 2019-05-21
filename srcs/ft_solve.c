@@ -32,7 +32,7 @@ int		ft_solve_unfillone(char *result, t_list *t_cur, size_t size, size_t i)
 	while (++j < 4)
 	{
 		index = i + ft_check_solve_coor(t_cur->shape[0], t_cur->shape[j], size);
-		if (index < 0 || index >= size * (size + 1)
+		if (index >= size * (size + 1)
 		|| index % (size + 1) == size)
 			return (0);
 		if (!result[index] || result[index] == t_cur->ch)
@@ -50,7 +50,7 @@ int		ft_solve_fillone(char *result, t_list *t_cur, size_t size, size_t i)
 	while (++j < 4)
 	{
 		index = i + ft_check_solve_coor(t_cur->shape[0], t_cur->shape[j], size);
-		if (index < 0 || index >= size * (size + 1)
+		if (index >= size * (size + 1)
 		|| index % (size + 1) == size)
 			return (ft_solve_unfillone(result, t_cur, size, i));
 		if (!result[index] || result[index] == '.')

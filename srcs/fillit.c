@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	{
 		str_src = ft_read_main(av);
 		if (!(t_tetris = ft_check_main(str_src)))
-			ft_putstr_fd("error\n", 2);
+			ft_putstr("error\n");
 		else
 		{
 			result = ft_solve_main(t_tetris);

@@ -72,9 +72,12 @@ t_list	*ft_check_main(char *src)
 	curr = list;
 	if (!src)
 		return (NULL);
+	if (ft_strlen(src) % 21 != 20)
+		return (NULL);
 	while (*src)
 	{
-		if (ft_check_char(src, &(curr->shape)) != 0)
+		if (ft_check_char(src, &(curr->shape)) != 0 || \
+		!(src[20] == '\n' || !src[20]))
 		{
 			ft_lstdel(&list, &ft_bzero);
 			return (NULL);
