@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	char	*result;
 
 	if (ac != 2)
-		ft_putstr_fd(STR_WRONGAC, 2);
+		ft_putstr(STR_WRONGAC);
 	else
 	{
 		str_src = ft_read_main(av);
