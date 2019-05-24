@@ -16,8 +16,6 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 1
-# define STR_WGOPEN ": No such file or directory\n"
-# define STR_WGREAD ": Error during reading\n"
 # define STR_WRONGAC "usage: fillit input_file\n"
 
 char	*ft_read_main(char **av);

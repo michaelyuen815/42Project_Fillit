@@ -11,26 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "fcntl.h"
-
-static void	ft_print_erropen(char *str_pgm, char *str_file)
-{
-	ft_putstr_fd("./", 2);
-	ft_putstr_fd(str_pgm, 2);
-	ft_putstr_fd(" ", 2);
-	ft_putstr_fd(str_file, 2);
-	ft_putstr_fd(STR_WGOPEN, 2);
-}
-
-static char	*ft_print_errread(char *str_pgm, char *str_file)
-{
-	ft_putstr_fd("./", 2);
-	ft_putstr_fd(str_pgm, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(str_file, 2);
-	ft_putstr_fd(STR_WGREAD, 2);
-	return (NULL);
-}
 
 char		*ft_read_combine(char **str_src, char *str_buff, int rd)
 {
@@ -57,15 +37,13 @@ char		*ft_read_main(char **av)
 	if (fd >= 0)
 	{
 		if (!(str_buff = ft_strnew(BUFF_SIZE)))
-			return (ft_print_errread(av[0], av[1]));
+			return (str_src);
 		while ((rd = read(fd, str_buff, BUFF_SIZE)) > 0)
 			str_src = ft_read_combine(&str_src, str_buff, rd);
 		free(str_buff);
 		close(fd);
 		if (fd < 0)
-			return (ft_print_errread(av[0], av[1]));
+			return (str_src);
 	}
-	else
-		ft_print_erropen(av[0], av[1]);
 	return (str_src);
 }
