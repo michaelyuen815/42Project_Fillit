@@ -12,6 +12,11 @@
 
 #include "fillit.h"
 
+/*
+** ft_read_combine is a sub-function of combining current reading (str_buff)
+** and previous reading (str_src)
+*/
+
 char		*ft_read_combine(char **str_src, char *str_buff, int rd)
 {
 	char *tmp_buff;
@@ -24,6 +29,13 @@ char		*ft_read_combine(char **str_src, char *str_buff, int rd)
 	*str_src = tmp_src;
 	return (tmp_src);
 }
+
+/*
+** ft_read_main is to keep reading input file (av[1]) until EOF
+** all reading content will be saved into str_src for the return
+** if any error found during the process (e.g. cannot open/read file),
+** return NULL for the function
+*/
 
 char		*ft_read_main(char **av)
 {

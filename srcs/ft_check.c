@@ -12,11 +12,20 @@
 
 #include "fillit.h"
 
+/*
+** function used in ft_solve for finding corresponding position for jth pt (shj)
+** with 1st pt of Tetris (shj) in solving square with size (size)
+*/
+
 int		ft_check_solve_coor(int sh0, int shj, size_t size)
 {
 	return (shj / 5 * (size + 1) - sh0 / 5 * (size + 1)
 	+ shj % 5 - sh0 % 5);
 }
+
+/*
+** function of returnning no of # (total) is connecting current #
+*/
 
 int		ft_check_sides(char *str, int i)
 {
@@ -33,6 +42,17 @@ int		ft_check_sides(char *str, int i)
 		total++;
 	return (total);
 }
+
+/*
+** function of saving current tetris coordination into current node (*shape)
+** return 0 if passed all validation checking
+** Otherwise, return -1
+** validation checking includes:
+** 1. character only consist ., #, \n
+** 2. \n must be only placed after every 4 characters
+** 3. no of # (bloack_count) must be equal to 4
+** 4. total connection btw #s (tol) must be equal to 6 or 8 (all # linked tgt)
+*/
 
 int		ft_check_char(char *str, int **shape)
 {
@@ -61,6 +81,19 @@ int		ft_check_char(char *str, int **shape)
 	return (0);
 }
 
+/*
+** function of converting tetris string (*src) into linked list (*list)
+** return NULL if src is NULL or total char is not correct
+**		total tetris must be btw 1 and 26 and
+**		total characters must be 20 + (n - 1) x 21 (where n is no. of tetris)
+** for each node, it saves:
+**	1. char to be printed for correspoding tetris (c)
+**	2. # coordination for correspoding tetris w ft_check_char(shape)
+** if valiation checking during ft_check_char fails, it delete whole *list
+** and return NULL immediately
+** Otherwise, return *list
+*/
+
 t_list	*ft_check_main(char *src)
 {
 	char	c;
@@ -72,7 +105,7 @@ t_list	*ft_check_main(char *src)
 	curr = list;
 	if (!src)
 		return (NULL);
-	if (ft_strlen(src) % 21 != 20)
+	if (ft_strlen(src) % 21 != 20 || ft_strlen(src) >= 26 * 21)
 		return (NULL);
 	while (*src)
 	{

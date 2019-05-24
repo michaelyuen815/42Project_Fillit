@@ -12,6 +12,16 @@
 
 #include "fillit.h"
 
+/*
+** 4 Steps to finish fillit
+** Step 0: make sure only 1 input file, otherwisem, print STR_WRONGAC and exit
+** Step 1: read the input file (ft_read_main)
+** Step 2: check and convert tetris into t_List (ft_check_main)
+** Step 3: find the smallest square (ft_solve_main)
+** Step 4: print the square (ft_putstr(result))
+** If any step cannot completed, print "error\n" and exit
+*/
+
 int	main(int ac, char **av)
 {
 	char	*str_src;
